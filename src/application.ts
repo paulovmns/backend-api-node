@@ -4,7 +4,7 @@ import routes from "./routes";
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/backendapi');
+mongoose.connect('mongodb://127.0.0.1:27017/backendapi');
 
 app.use(express.json());
 
