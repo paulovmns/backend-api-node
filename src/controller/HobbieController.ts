@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import Experiencia from "../database/schemas/Experiencia";
+import Hobbie from "../database/schemas/Hobbie";
 
-class ExperienciaController {
+class HobbieController {
 
 
     async delete(request: Request, response: Response){
         try {
 
             const {id} = request.params;
-            const data = await Experiencia.findByIdAndDelete(id);
+            const data = await Hobbie.findByIdAndDelete(id);
 
         if(!data) {
 
@@ -27,7 +27,7 @@ class ExperienciaController {
     async update(request: Request, response: Response){
         try {
         const {id} = request.params;
-        await Experiencia.findByIdAndUpdate(id, request.body);
+        await Hobbie.findByIdAndUpdate(id, request.body);
 
         response.status(200).json ({message: "Success! Data updated!"});
         
@@ -42,7 +42,7 @@ class ExperienciaController {
 
         try {
 
-            const users = await Experiencia.find();
+            const users = await Hobbie.find();
             return response.json(users);
 
         } catch (error) {
@@ -62,12 +62,11 @@ class ExperienciaController {
 
     try {
 
-        const user = await Experiencia.create({
+        const user = await Hobbie.create({
             descricao,
             local,
             periodo,
         });
-        
         return response.json(user);
         
     } catch (error) {
@@ -79,4 +78,4 @@ class ExperienciaController {
     }
 }
 
-    export default new ExperienciaController();
+    export default new HobbieController();

@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import Experiencia from "../database/schemas/Experiencia";
+import FormacaoAcademica from "../database/schemas/FormacaoAcademica";
 
-class ExperienciaController {
+class FormacaoAcademicaController {
 
 
     async delete(request: Request, response: Response){
         try {
 
             const {id} = request.params;
-            const data = await Experiencia.findByIdAndDelete(id);
+            const data = await FormacaoAcademica.findByIdAndDelete(id);
 
         if(!data) {
 
@@ -27,10 +27,9 @@ class ExperienciaController {
     async update(request: Request, response: Response){
         try {
         const {id} = request.params;
-        await Experiencia.findByIdAndUpdate(id, request.body);
+        await FormacaoAcademica.findByIdAndUpdate(id, request.body);
 
         response.status(200).json ({message: "Success! Data updated!"});
-        
         }catch(error){
             return response.status(404).json({message: "ERROR: Update not working."});
 
@@ -42,7 +41,7 @@ class ExperienciaController {
 
         try {
 
-            const users = await Experiencia.find();
+            const users = await FormacaoAcademica.find();
             return response.json(users);
 
         } catch (error) {
@@ -62,14 +61,13 @@ class ExperienciaController {
 
     try {
 
-        const user = await Experiencia.create({
+        const user = await FormacaoAcademica.create({
             descricao,
             local,
             periodo,
         });
-        
         return response.json(user);
-        
+
     } catch (error) {
         return response.status(500).json({
             error: "Registration failed",
@@ -79,4 +77,4 @@ class ExperienciaController {
     }
 }
 
-    export default new ExperienciaController();
+    export default new FormacaoAcademicaController();

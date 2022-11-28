@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import Experiencia from "../database/schemas/Experiencia";
+import RegistroPessoal from "../database/schemas/RegistroPessoal";
 
-class ExperienciaController {
+class RegistroPessoalController {
 
 
     async delete(request: Request, response: Response){
         try {
 
             const {id} = request.params;
-            const data = await Experiencia.findByIdAndDelete(id);
+            const data = await RegistroPessoal.findByIdAndDelete(id);
 
         if(!data) {
 
@@ -27,10 +27,9 @@ class ExperienciaController {
     async update(request: Request, response: Response){
         try {
         const {id} = request.params;
-        await Experiencia.findByIdAndUpdate(id, request.body);
+        await RegistroPessoal.findByIdAndUpdate(id, request.body);
 
         response.status(200).json ({message: "Success! Data updated!"});
-        
         }catch(error){
             return response.status(404).json({message: "ERROR: Update not working."});
 
@@ -42,7 +41,7 @@ class ExperienciaController {
 
         try {
 
-            const users = await Experiencia.find();
+            const users = await RegistroPessoal.find();
             return response.json(users);
 
         } catch (error) {
@@ -57,17 +56,18 @@ class ExperienciaController {
     }
 
     async create(request: Request, response: Response) {
-        const { descricao, local, periodo } = request.body;
+        const { nome, idade, bairro, cidadeEstado } = request.body;
 
 
     try {
 
-        const user = await Experiencia.create({
-            descricao,
-            local,
-            periodo,
+        const user = await RegistroPessoal.create({
+            nome,
+            idade,
+            bairro,
+            cidadeEstado,
         });
-        
+
         return response.json(user);
         
     } catch (error) {
@@ -79,4 +79,4 @@ class ExperienciaController {
     }
 }
 
-    export default new ExperienciaController();
+    export default new RegistroPessoalController();
